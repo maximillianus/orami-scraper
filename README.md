@@ -9,26 +9,31 @@ The objective of this scraper is to get all products information from [Orami](ht
 ## Application Details
 
 ### Flow
-The scraper will first scrape the product categories' links and save it in `orami/results/urls.json`. It will then scrape individual product information by looping through the urls and save them in `orami/results/products.json` or `orami/results/products.csv` whichever format you like.
+The scraper will first scrape the product categories' links and save it in `./orami/results/urls.json`. It will then scrape individual product information by looping through the urls and save them in `./orami/results/products.json` or `./orami/results/products.csv` whichever format you like.
 
-Sample results are also available `orami/results/`
+Sample results are also available `./orami/results/`
 
 ### Output Format
-Scrapy has a native CSV Exporter however I don't use it since it produces unordered columns in the result. There are ways to modify scrapy to work around this but it is much simpler to create my own `json-to-csv` converter in `utils/jsontocsv.py` to do the format conversion.
+Scrapy has a native CSV Exporter however I don't use it since it produces unordered columns in the result. There are ways to modify scrapy to work around this but it is much simpler to create my own `json-to-csv` converter in `./orami/utils/jsontocsv.py` to do the format conversion.
 
 ### Settings
 In order to be more polite to the website, I have set up throttling to the crawler. This includes increasing delay between downloads and lowering number of concurrent requests. You can adjust these settings if you want a faster crawling but it is recommended to keep it at reasonable rate to avoid stress on the website.
 
 ### Unit Test
-Run the unit test from the project directory ie. `orami-scraper/orami`.
+Run the unit test from the project directory ie. `./orami`.
 
 Run it using: `python3 -m unittest orami.tests.test_orami_spider`
+
 OR
+
 Run it using the shellscript: `./03_run_unittest.sh`
 
-
 ### Other Notes
-- skipped on linting but you can use `black` or `flake8` if you wish to have it
+Due to time, there are some additional stuffs that don't make it to this build.
+- Code linting. We can use `black` or `flake8`.
+- Containerization. Can use `Docker` to containerize it.
+- Add more `try-except` block for error handling.
+- Can possibly setup user-agent in `settings.py`
 - again, remember to scrape politely
 
 ## Getting it up and running
@@ -41,9 +46,9 @@ Run it using the shellscript: `./03_run_unittest.sh`
    - `source venv/bin/activate`
 3. Install scrapy
    - `pip install scrapy`
-4. Go to `orami` directory and run the shellscripts
+4. Go to `./orami` directory and run the shellscripts
    1. `./01_scrape_links.sh`
    2. `./02_scrape_products_json.sh` for json output or `./02_scrape_products_csv.sh` for csv
-5. Results will be available in `results` directory.
+5. Results will be available in `./orami/results` directory.
 
 
