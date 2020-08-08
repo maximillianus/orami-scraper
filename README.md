@@ -9,13 +9,21 @@ The objective of this scraper is to get all products information from [Orami](ht
 ## Application Details
 
 ### Flow
-The scraper will first scrape the product categories' links and save it in `results/urls.json`. It will then scrape individual product information by looping through the urls and save them in `results/products.json` or `results/products.csv` whichever format you like.
+The scraper will first scrape the product categories' links and save it in `orami/results/urls.json`. It will then scrape individual product information by looping through the urls and save them in `orami/results/products.json` or `orami/results/products.csv` whichever format you like.
+
+Sample results are also available `orami/results/`
 
 ### Output Format
 Scrapy has a native CSV Exporter however I don't use it since it produces unordered columns in the result. There are ways to modify scrapy to work around this but it is much simpler to create my own `json-to-csv` converter in `utils/jsontocsv.py` to do the format conversion.
 
 ### Settings
 In order to be more polite to the website, I have set up throttling to the crawler. This includes increasing delay between downloads and lowering number of concurrent requests. You can adjust these settings if you want a faster crawling but it is recommended to keep it at reasonable rate to avoid stress on the website.
+
+### Unit Test
+Run the unit test from the project directory ie. `orami-scraper/orami`.
+
+Run it using: `python3 -m unittest orami.tests.test_orami_spider`
+
 
 ### Other Notes
 - skipped on linting but you can use `black` or `flake8` if you wish to have it

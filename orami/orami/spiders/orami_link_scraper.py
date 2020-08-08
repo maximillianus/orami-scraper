@@ -5,7 +5,8 @@ from ..items import OramiLinkItem
 class OramiLinkSpider(scrapy.Spider):
     name = 'orami-links'
     start_urls = [
-        'https://www.orami.co.id/'
+        'https://www.orami.co.id/',
+        'https://www.orami.co.id/c/pakaian-bayi'
     ]
 
     def category_parser(self, node, next_level_selector):
@@ -24,7 +25,7 @@ class OramiLinkSpider(scrapy.Spider):
     def parse(self, response):
         level1_categories = response.css('#main-nav>li')
         # parse cat lv 1
-        for cat in level1_categories[1:2]:
+        for cat in level1_categories[:]:
             NEXT_LEVEL_SELECTOR = '.second-level .wrap-second-cat>ul'
             level1_name, level1_link, level2_categories = \
                 self.category_parser(cat, NEXT_LEVEL_SELECTOR)
@@ -38,12 +39,6 @@ class OramiLinkSpider(scrapy.Spider):
                     NEXT_LEVEL_SELECTOR = 'none'
                     level3_name, level3_link, level4_categories = \
                         self.category_parser(cat, NEXT_LEVEL_SELECTOR)
-                    # yield {
-                    #     'level1_category': level1_name,
-                    #     'level2_category': level2_name,
-                    #     'level3_category': level3_name,
-                    #     'url': level3_link
-                    # }
                     yield OramiLinkItem(
                         category_level1=level1_name,
                         category_level2=level2_name,
