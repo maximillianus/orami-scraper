@@ -23,6 +23,8 @@ In order to be more polite to the website, I have set up throttling to the crawl
 Run the unit test from the project directory ie. `orami-scraper/orami`.
 
 Run it using: `python3 -m unittest orami.tests.test_orami_spider`
+OR
+Run it using the shellscript: `./03_run_unittest.sh`
 
 
 ### Other Notes
