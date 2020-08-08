@@ -26,6 +26,7 @@ class OramiProductPipeline:
             adapter['product_url'] = adapter.get('product_url').strip()
 
         adapter['rating'] = str(adapter.get('rating'))
+        adapter['created'] = str(adapter.get('created'))
 
         if adapter.get('price_range'):
             adapter['price_range'] = adapter.get('price_range').strip()

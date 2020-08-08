@@ -1,6 +1,6 @@
 import json
 import scrapy
-from pprint import pprint
+from datetime import datetime
 
 from ..items import OramiProductItem
 
@@ -10,7 +10,7 @@ class OramiProductSpider(scrapy.Spider):
     try:
         with open(urlfilepath, 'r') as infile:
             urldata = json.load(infile)
-        start_urls = [obj.get('url') for obj in urldata][:]
+        start_urls = [obj.get('url') for obj in urldata][:1]
     except FileNotFoundError:
         # if no file found, set default urls
         start_urls = [
@@ -45,14 +45,6 @@ class OramiProductSpider(scrapy.Spider):
             product_category_level1=categories['level1'],
             product_category_level2=categories['level2'],
             product_category_level3=categories['level3'],
-            # product_name=product_name.strip() if product_name else None,
-            # product_brand=product_brand.strip() if product_brand else None,
-            # price_range=price_range.strip() if price_range else None,
-            # normal_price=normal_price.strip() if normal_price else None,
-            # disc_price=disc_price.strip() if disc_price else None,
-            # is_onsale=True if disc_price else False,
-            # review_count=review_count.strip() if review_count else '0',
-            # rating=str(rating),
             product_name=product_name,
             product_brand=product_brand,
             price_range=price_range,
@@ -61,6 +53,7 @@ class OramiProductSpider(scrapy.Spider):
             is_onsale=True if disc_price else False,
             review_count=review_count.strip() if review_count else '0',
             rating=rating,
+            created=datetime.utcnow(),
             product_url=product_url,
         )
     

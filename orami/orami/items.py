@@ -23,10 +23,11 @@ class OramiProductItem(scrapy.Item):
     product_category_level3 = scrapy.Field()
     product_name = scrapy.Field()
     product_brand = scrapy.Field()
-    price_range = scrapy.Field()
-    normal_price = scrapy.Field()
-    disc_price = scrapy.Field()
-    is_onsale = scrapy.Field()
-    review_count = scrapy.Field()
-    rating = scrapy.Field()
+    price_range = scrapy.Field()    # to cater for products that have price range
+    normal_price = scrapy.Field()   # normal price
+    disc_price = scrapy.Field()     # price when there is sale
+    is_onsale = scrapy.Field()      # boolean flag to tell whether item is onsale
+    review_count = scrapy.Field()   # no of reviews this item has
+    rating = scrapy.Field()         # product rating
+    created = scrapy.Field()        # UTC timestamp for when the item is scraped
     product_url = scrapy.Field()
