@@ -1,11 +1,25 @@
 # orami-scraper
-Polite scraper for orami website. This scraper is based on Python's [Scrapy](https://docs.scrapy.org/en/latest/index.html) framework. This is my first time using Scrapy framework so I might not utilize all the best practices available for it.
+Polite scraper for [Orami](https://www.orami.co.id/) website. 
+
+This scraper is based on Python's [Scrapy](https://docs.scrapy.org/en/latest/index.html) framework. This is my first time using Scrapy framework so I might not utilize all the best practices available for it.
 
 ## Scraper Objective
-The objective of this scraper is to get all products information from Orami website.
+The objective of this scraper is to get all products information from [Orami](https://www.orami.co.id/).website.
 
-## Application Flow
+## Application Details
+
+### Flow
 The scraper will first scrape the product categories' links and save it in `results/urls.json`. It will then scrape individual product information by looping through the urls and save them in `results/products.json` or `results/products.csv` whichever format you like.
+
+### Output Format
+Scrapy has a native CSV Exporter however I don't use it since it produces unordered columns in the result. There are ways to modify scrapy to work around this but it is much simpler to create my own `json-to-csv` converter in `utils/jsontocsv.py` to do the format conversion.
+
+### Settings
+In order to be more polite to the website, I have set up throttling to the crawler. This includes increasing delay between downloads and lowering number of concurrent requests. You can adjust these settings if you want a faster crawling but it is recommended to keep it at reasonable rate to avoid stress on the website.
+
+### Other Notes
+- skipped on linting but you can use `black` or `flake8` if you wish to have it
+- again, remember to scrape politely
 
 ## Getting it up and running
 1. Ensure you have Python 3
@@ -19,7 +33,7 @@ The scraper will first scrape the product categories' links and save it in `resu
    - `pip install scrapy`
 4. Go to `orami` directory and run the shellscripts
    1. `./01_scrape_links.sh`
-   2. `./02_scrape_products.sh`
+   2. `./02_scrape_products_json.sh` for json output or `./02_scrape_products_csv.sh` for csv
 5. Results will be available in `results` directory.
 
 
